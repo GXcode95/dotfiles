@@ -1,0 +1,34 @@
+###
+##	GIT	
+###########################
+alias g="git"
+alias cpbr="git branch --show-current | pbcopy"
+alias wip="git commit -m 'WIP'"
+alias gcleanbr='sh /Users/xav/dev/script/git_clean_branch_older_than_one_month.sh'
+alias rbmain='g sw main && g pull && g sw - && g rb main'
+alias rbdev='g sw develop && g pull && g sw - && g rb develop'
+
+### github cli
+alias gh-info="gh_info"
+alias gh-watch="gh run watch \$(gh run list --limit 1 --json databaseId -q '.[0].databaseId')"
+
+gh_info() {
+  cat <<'EOF'
+list:
+gh workflow list
+
+run:
+gh workflow run <workflowname> --ref <branch>
+
+suivre logs:
+gh run list --limit 5
+gh run watch <run-id> --log --exit-status
+
+suivre juste le dernier workflow:
+gh run watch $(gh run list --limit 1 --json databaseId -q '.[0].databaseId') --log --exit-status
+
+rerun/cancel:
+gh run rerun <run-id>
+gh run cancel <run-id>
+EOF
+}

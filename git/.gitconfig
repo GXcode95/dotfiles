@@ -1,0 +1,71 @@
+[alias]
+  psuh = push
+  puhs = push
+  aa = add --all
+  ap = add -p
+  pl = pull
+  plsb = submodule update --remote --recursive
+  plr = pull --rebase
+  st = status
+  br = branch
+  ll = branch --list
+  lls= branch --sort=-committerdate
+  llrs = branch --sort=committerdate
+  bl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+  cane = commit --amend --no-edit
+  cv = commit -v
+  cm = commit -m
+  co = checkout
+  rb = rebase
+  rbc = rebase --continue
+  lg = log --graph --pretty=format:'%C(bold)–%Creset %C(red bold)%h%d%Creset | %C(green)%an%Creset | %C(magenta)%cr%Creset | %C(cyan)%s%Creset'
+  lgp = log -p
+  lgo = log --oneline
+  lgn = log --name-only
+  rs = restore
+  rss = restore --staged
+  sw = switch
+  bb = switch -
+# https://www.zaratan.fr/conseil-sur-git pour faire marcher les pr 
+    # pr = pull-request
+    # ppr = pull-request  
+[core]
+  editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[pager]
+    diff = delta
+    log  = delta
+    reflog = delta
+    show = delta
+[delta]
+    syntax-theme = Dracula
+    line-numbers = true 
+[push]
+  default = upstream
+[github]
+  user = GXcode95
+[pull]
+  rebase = true
+[init]
+  defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = auto
+[interactive]
+	diffFilter = delta --color-only
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[user]
+	name = Xavier
+	email = xavier.grenouillet@gmail.com

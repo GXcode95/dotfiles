@@ -1,0 +1,19 @@
+.notification-row .notification-background .notification {
+  border: 1px solid blue;
+}
+
+.notification-row .notification-background .notification.Slack,
+.notification-row .notification-background .notification.slack,
+.slack, .Slack {
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-left-color: #ff9800;
+  border: 2px solid orange;
+}
+
+.notification-row .notification-background .notification.Slack,
+.notification-row .notification-background .notification.slack {
+  font-weight: bold;
+}
+
+

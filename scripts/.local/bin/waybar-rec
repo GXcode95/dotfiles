@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+if pgrep -x wf-recorder >/dev/null 2>&1; then
+  echo '{"text":" REC","class":"recording","tooltip":"wf-recorder en cours"}'
+else
+  echo '{"text":"","class":"idle","tooltip":"Pas d’enregistrement"}'
+fi

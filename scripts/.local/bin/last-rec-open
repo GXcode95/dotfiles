@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+LAST="$HOME/.cache/last_recording"
+[ -f "$LAST" ] || exit 0
+
+file=$(cat "$LAST")
+[ -n "${file:-}" ] || exit 0
+
+xdg-open "$file" >/dev/null 2>&1 || xdg-open "$(dirname "$file")" >/dev/null 2>&1
+# xdg-open "$file" || xdg-open "$(dirname "$file")" 
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+SCRIPTS_DIR="$HOME/.local/bin"
+
+# take ls output, pass it to wofi and store the selected choice in a var
+CHOICE=$(ls "$SCRIPTS_DIR" | wofi --dmenu -p "Run script")
+
+# quit if no choice
+[ -z "$CHOICE" ] && exit 0
+
+# Run choosen script
+"$SCRIPTS_DIR/$CHOICE"

@@ -1,0 +1,44 @@
+#!/bin/sh
+set -eu
+
+PROJECTS_DIR="$HOME/dev/.symlinks"
+
+project_name=$(
+  ls -1 "$PROJECTS_DIR" 2>/dev/null | wofi --dmenu -p "Rails project"
+)
+
+[ -z "${project_name:-}" ] && exit 0
+
+# follow the symlink with readlink 
+project_path=$(readlink -f "$PROJECTS_DIR/$project_name")
+
+rails_cmd="$project_path/bin/rails"
+
+routes_raw=$(cd "$project_path" && sh -lc "$project_path/bin/rails routes" 2>/dev/null || true)
+[ -n "${routes_raw:-}" ] || exit 1
+
+# format ouput (prefix verb uri controller#action)
+routes_list=$(printf "%s\n" "$routes_raw" | awk '
+NR==1 { next }      # skip header
+NF==0 { next }
+
+{
+  if ($2 ~ /^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)$/) {
+    prefix=$1; verb=$2; uri=$3; ctrl=$4;
+  } else if ($1 ~ /^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)$/) {
+    prefix="-"; verb=$1; uri=$2; ctrl=$3;
+  } else {
+    next
+  }
+  printf "%-15s %-6s %-45s %s\n", prefix, verb, uri, ctrl
+}')
+
+choice=$(printf "%s\n" "$routes_list" | wofi --dmenu -p "Route ($project_name)")
+[ -z "${choice:-}" ] && exit 0
+
+# copy uri
+uri=$(printf "%s\n" "$choice" | awk '{print $3}')
+printf "%s" "$uri" | wl-copy
+
+command -v notify-send >/dev/null 2>&1 && notify-send "Rails route copied" "$uri" || true
+

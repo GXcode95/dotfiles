@@ -1,0 +1,49 @@
+#
+## Docker
+#########################
+alias dc="docker-compose"
+alias dce="docker-compose exec"
+alias dcer="docker-compose exec rails"
+alias dctest="docker-compose run test"
+alias dcspec="docker-compose run test bundle exec rspec -fd"
+
+##
+## Postgresql
+#########################
+alias pg_start="brew services start postgresql@14"
+alias pg_stop="brew services stop postgresql@14"
+alias pg_manual_start="postgres -D /usr/local/var/postgresql@14"
+alias pg_reset_pid="rm /usr/local/var/postgresql@14/postmaster.pid"
+
+##
+##	Rails
+###########################
+alias rc="rails console"
+alias bi="bundle install"
+alias dbfull="rails db:drop db:create db:migrate db:seed"
+alias migrate="rails db:migrate"
+alias dbst="rails db:migrate:status"
+alias dbroll="rails db:rollback"
+alias groutes="rails routes | grep "
+alias froute='rails routes | wofi --dmenu -p "Rails project"'
+alias rpsec="bundle exec rspec -fd"
+alias rspce="bundle exec rspec -fd"
+alias db0="rails db:migrate VERSION=0"
+alias killpgsl="rm /opt/homebrew/var/postgresql@14/postmaster.pid"
+alias imap="./bin/importmap pin "
+alias killrails='lsof -i tcp:3000 | awk '\''$1 == "ruby" {print $2}'\'' | xargs -I {} kill -9 {}'
+alias kr='killrails'
+alias krs="killrails && rails s"
+alias ras="rails assets:precompile && rails s"
+alias rub="rubocop"
+alias ruba="rubocop -A"
+alias rsp="bundle exec rspec -fd"
+alias bd="bin/dev"
+alias omc="overmind connect"
+
+##
+##  Python
+###########################
+alias py="python3"
+alias pip="pip3"
+alias py-activate="py -m venv venv && source venv/bin/activate"

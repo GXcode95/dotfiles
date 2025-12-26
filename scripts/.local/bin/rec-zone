@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+mkdir -p "$HOME/Vidéos/records/"
+
+echo "$file" > "$HOME/.cache/last_recording"
+
+wf-recorder -g "$(slurp)" -f "$file" 
+
+# force refresh waybar
+pkill -SIGRTMIN+8 waybar 2>/dev/null || true
+
+notify-send "Recording started" "$file" || true

@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+mkdir -p "$HOME/Vidéos/records/"
+file="$HOME/Vidéos/records/record_$(date +%F_%H-%M-%S).mp4"
+
+echo "$file" > "$HOME/.cache/last_recording"
+
+wf-recorder -f "$file" >/dev/null 2>&1 &
+
+# force refresh waybar
+pkill -SIGRTMIN+8 waybar 2>/dev/null || true
+
+notify-send -u low -t 3000 "Recording started" "$file" || true

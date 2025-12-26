@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+pkill -SIGINT wf-recorder 2>/dev/null || true
+
+# refresh waybar
+pkill -SIGRTMIN+8 waybar 2>/dev/null || true
+
+LAST="$HOME/.cache/last_recording"
+if [ -f "$LAST" ]; then
+  file=$(cat "$LAST" || true)
+  [ -n "${file:-}" ] && notify-send -u low -t 3000 "Recording saved" "$file" || true
+fi

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+result=$(wofi --dmenu -p "Calc" <<< "")
+[ -z "$result" ] && exit 0
+
+echo "$result" | qalc -t | wl-copy
+notify-send "Calc" "$(qalc -t "$result")"

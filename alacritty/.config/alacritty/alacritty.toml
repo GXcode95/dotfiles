@@ -1,0 +1,50 @@
+[terminal.shell]
+program = "/usr/bin/zsh"
+#args = ["-l", "-i", "-c", "exec zellij"]
+
+[window]
+# option_as_alt = "Both"
+option_as_alt = "OnlyLeft"
+opacity = 0.6
+
+[env]
+WINIT_UNIX_BACKEND = "x11"
+ZELLIJ_COPY_COMMAND = "xclip -selection clipboard"
+
+[selection]
+save_to_clipboard = true
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font Mono" }
+italic = { family = "JetBrainsMono Nerd Font Mono" }
+size = 12.0
+
+# Colors (Tokyo Night Enhanced) + green darcula
+
+[colors.primary]
+background = "#08080b"
+foreground = "#787c99"
+[colors.cursor]
+cursor = "#787c99"
+[colors.selection]
+text = "CellForeground"
+background = "#515c7e"
+[colors.normal]
+black = "#363b54"
+red = "#f7768e"
+green = "#50fa7b"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#787c99"
+[colors.bright]
+black = "#363b54"
+red = "#f7768e"
+green = "#41a6b5"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#787c99"
